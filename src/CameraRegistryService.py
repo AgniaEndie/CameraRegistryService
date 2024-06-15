@@ -20,6 +20,7 @@ def registry():
         cursor.fetchall()
         return Response('{"registry":"success"}', 201)
     except Exception as e:
+        print(e)
         try:
             db = DatabaseConnect()
             conn = db.conn()
@@ -29,6 +30,7 @@ def registry():
             cursor.fetchall()
             return Response('{"registry":"error"}', 500)
         except Exception as err:
+            print(err)
             return Response('{"registry":"error"}', 500)
 
 
