@@ -16,6 +16,7 @@ def registry():
         db = DatabaseConnect()
         conn = db.conn()
         cursor = conn.cursor()
+        print(data)
         cursor.execute(f"insert into cameras (uuid, ip_external,name) values ({uuid.uuid4()},{data['ip']},{data['name']})")
         cursor.fetchall()
         return Response('{"registry":"success"}', 201)
