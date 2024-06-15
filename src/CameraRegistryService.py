@@ -49,6 +49,7 @@ def get_all():
         cursor = conn.cursor()
         cursor.execute("select * from cameras")
         data = cursor.fetchall()
+        print("me")
         raw_data = []
         for elem in data:
             raw_data.append(elem)
