@@ -17,7 +17,8 @@ def registry():
         conn = db.conn()
         cursor = conn.cursor()
         print(data)
-        cursor.execute(f"insert into cameras (uuid, ip_external,name) values ({uuid.uuid4()},{data['ip']},{data['name']})")
+        cursor.execute(
+            f"insert into cameras (uuid, ip_external,name) values ({uuid.uuid4()},{data['ip']},{data['name']})")
         cursor.fetchall()
         return Response('{"registry":"success"}', 201)
     except Exception as e:
@@ -29,10 +30,12 @@ def registry():
             cursor.execute(
                 f"CREATE TABLE IF NOT EXISTS cameras(uuid varchar(255),ip_external varchar(255), name varchar(255))")
             cursor.fetchall()
-            return Response('{"registry":"error"}', 500)
+            # return Response('{"registry":"error"}', 500)
+            return data
         except Exception as err:
             print(err)
-            return Response('{"registry":"error"}', 500)
+            # return Response('{"registry":"error"}', 500)
+            return data
 
 
 @app.route('/remove/<id>', methods=["DELETE"])
