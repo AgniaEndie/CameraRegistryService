@@ -20,6 +20,10 @@ def registry():
         cursor.execute(
             f"insert into cameras (uuid, ip_external,name) values ({uuid.uuid4()},{data['ip']},{data['name']})")
         cursor.fetchall()
+        abc = data['ip']
+        if abc:
+            return abc
+
         return Response('{"registry":"success"}', 201)
     except Exception as e:
         print(e)
