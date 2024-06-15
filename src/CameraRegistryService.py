@@ -18,7 +18,7 @@ def registry():
         cursor = conn.cursor()
         print(data)
         cursor.execute(
-            f"insert into cameras (uuid, ip_external, name) values ('{uuid.uuid4()}', '{data['ip']}', '{data['name']}')")
+            f"insert into cameras (uuid, ip_external, name) values ('{data['uuid']}', '{data['ip']}', '{data['name']}')")
         conn.commit()
         return Response('{"registry":"success"}', 201)
     except Exception as e:
