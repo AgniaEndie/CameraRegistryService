@@ -13,37 +13,26 @@ def registry():
     try:
         raw_data = request.data
         data = json.loads(raw_data)
-        try:
-            db = DatabaseConnect()
-            conn = db.conn()
-        except Exception as e:
-            return Response(e,501)
-
+        db = DatabaseConnect()
+        conn = db.conn()
         cursor = conn.cursor()
         print(data)
         cursor.execute(
-            f"insert into cameras (uuid, ip_external,name) values ({uuid.uuid4()},{data['ip']},{data['name']})")
-        cursor.fetchall()
-        abc = data['ip']
-        if abc:
-            return abc
-
+            f"insert into cameras (uuid, ip_external, name) values ('{uuid.uuid4()}', '{data['ip']}', '{data['name']}')")
+        conn.commit()
         return Response('{"registry":"success"}', 201)
     except Exception as e:
-        return Response(e,502)
         try:
             db = DatabaseConnect()
             conn = db.conn()
             cursor = conn.cursor()
             cursor.execute(
-                f"CREATE TABLE IF NOT EXISTS cameras(uuid varchar(255),ip_external varchar(255), name varchar(255))")
-            cursor.fetchall()
-            # return Response('{"registry":"error"}', 500)
-            return data
+                f"CREATE TABLE IF NOT EXISTS cameras(uuid varchar(255), ip_external varchar(255), name varchar(255))")
+            conn.commit()
+            return Response('{"registry":"error"}', 500)
         except Exception as err:
             print(err)
-            # return Response('{"registry":"error"}', 500)
-            return data
+            return Response('{"registry":"error"}', 500)
 
 
 @app.route('/remove/<id>', methods=["DELETE"])
