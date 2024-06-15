@@ -30,7 +30,7 @@ def registry():
 
         return Response('{"registry":"success"}', 201)
     except Exception as e:
-        print(e)
+        return e
         try:
             db = DatabaseConnect()
             conn = db.conn()
