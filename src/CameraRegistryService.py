@@ -13,8 +13,12 @@ def registry():
     try:
         raw_data = request.data
         data = json.loads(raw_data)
-        db = DatabaseConnect()
-        conn = db.conn()
+        try:
+            db = DatabaseConnect()
+            conn = db.conn()
+        except Exception as e:
+            return "ERRRR"
+
         cursor = conn.cursor()
         print(data)
         cursor.execute(
