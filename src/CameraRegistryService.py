@@ -16,7 +16,7 @@ def registry():
         db = DatabaseConnect()
         conn = db.conn()
         cursor = conn.cursor()
-        cursor.execute(f"insert into cameras (uuid, ip) values ({uuid.uuid4()},{data['ip']})")
+        cursor.execute(f"insert into cameras (uuid, ip_external,name) values ({uuid.uuid4()},{data['ip']},{data['name']})")
         cursor.fetchall()
         return Response('{"registry":"success"}', 201)
     except Exception as e:
