@@ -26,7 +26,7 @@ def registry():
             conn = db.conn()
             cursor = conn.cursor()
             cursor.execute(
-                f"CREATE DATABASE IF NOT EXISTS cameras (CREATE TABLE IF NOT EXISTS cameras(uuid varchar(255),ip_external varchar(255), name varchar(255)))")
+                f"CREATE TABLE IF NOT EXISTS cameras(uuid varchar(255),ip_external varchar(255), name varchar(255))")
             cursor.fetchall()
             return Response('{"registry":"error"}', 500)
         except Exception as err:
