@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/registry', methods=["POST"])
 def registry():
     try:
-        #test
+
         return Response('{"registry":"success"}', 201)
     except Exception as e:
         return Response('{"registry":"error"}', 500)
