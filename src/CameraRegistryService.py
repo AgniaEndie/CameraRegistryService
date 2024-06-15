@@ -17,7 +17,7 @@ def registry():
             db = DatabaseConnect()
             conn = db.conn()
         except Exception as e:
-            return "ERRRR"
+            return Response(e,501)
 
         cursor = conn.cursor()
         print(data)
